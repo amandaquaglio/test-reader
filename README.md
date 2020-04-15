@@ -23,7 +23,7 @@ or clone from the source:
  ```
 ## Usage
 
-For installation using pip (PyPI or source)
+For installation using pip (PyPI or source). See environment variables config.
  ```
     test-reader-start 
  ```
@@ -32,6 +32,37 @@ For installation from the source, go to the source project path and run
     python bin/test-reader-start
  ```   
 ## Settings
+
+### Environment Variables
+| Variable                  | Description                                                                      | Required |
+| ----------------          | -------------------------------------------------------------------------------- | ---------|
+| APP_NAME                  | The tests will be saved on a sheet of a google spreadsheet. The name of sheet should correspond to APP_NAME, passed on this environment variable| yes |
+| YAML_CONFIG_PATH          | This variable contains the path to yaml file, to describe your tests configuration / distribution, the paths you need. | yes |
+| SPREADSHEET_ID            | The id of your Google spreadsheet. For more info, check on Google Spreadsheet settings.| yes |
+| CREDENTIALS_JSON          | To be able to edit a spreadsheet, you need a credentials json generated on your Google account. For more info, check on Google Spreadsheet settings.| yes |
+
+### Configuration on Google Spreadsheet
+#### Getting your spreadsheet id
+Create a new Spreadsheet in your Google Drive. On URL, your spreadsheet id will be located between  https://docs.google.com/spreadsheets/d/ and /edit. See the example below:
+https://docs.google.com/spreadsheets/d/```1wSAkr0m4D-6YolQycW-aZBV3zvBz0aoxqRCZLDqGeqM```/edit#gid=0
+
+#### Generating your credentials.json
+1. Go to https://console.cloud.google.com/
+2. Search for Google Drive API and enable it.
+3. Search for Google Sheets API and enable it.
+4. On Google Sheets API, go to Credentials menu.
+5. Click on CREATE CREDENTIALS and select Service Account
+6. Inform any service account name and click on Create.
+7. You will be redirected to Service account permissions, click on Continue.
+8. At this step, go to create key and click at button + Create Key.
+9. Check if JSON option is select and click on Create. At this step, a json file will be downloaded. This json path should be informed at CREDENTIALS_JSON environment variable.
+
+#### Associating permission to your spreadsheet
+1. When you generates yout credentials json (usually it's called dark-balancer<random_value>.json), check that there is a field on json named client_email. Copy the value of this field.
+2. Go to your spreadsheet and share it with this email. Note: You will need to give edition permission to this email.
+3. Now you are ready to export your tests.
+After generating your credentials.json, go to your spreadsheet. 
+
 
 ### YAML file
 The test reader is based on an yaml configuration. This configuration will instruct the script where to find your tests, as well, how to identify it and what is it test type name.
@@ -128,3 +159,6 @@ On this example, you will export:
 |/home/amandaq/projects/my-android-app/app/src/test/java/SumActivityTest.java|should show sum|Component|
 
 Note in the example above, that we used extends, because the types are in the path. If you have different tests in different paths, you can't use extension.
+
+## Notes
+This first version only exports to Google Spreadsheets. With this, you can create many view at Google Data Studio to manage your tests.
