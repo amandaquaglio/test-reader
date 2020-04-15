@@ -85,7 +85,7 @@ This way, you can map the distribution and test types you need, and use it to ma
 This example is configured to identify unit tests from Kotlin. 
 
 Supposing the following file:
-/home/amandaq/projects/my-android-app/app/src/test/java/SumTest.java
+~/projects/my-android-app/app/src/test/java/SumTest.java
 ```
 class SumTest {
   @Test
@@ -101,7 +101,7 @@ tests:
   -
     file_name_regex: .*Test\.kt$
     name: Unit
-    path: /home/amandaq/projects/my-android-app/app/src/test/java
+    path: ~/projects/my-android-app/app/src/test/java
     test_rules:
       test_description_regex: "`(.+?)`"
       test_description_strategy: NEXT_LINE
@@ -110,14 +110,14 @@ tests:
 On this example, you will export:
 | File Name | Test Case Name | Test Type |
 |-----------|----------------|-----------|
-|/home/amandaq/projects/my-android-app/app/src/test/java/SumTest.java|should sum two numbers|Unit|
+|~/projects/my-android-app/app/src/test/java/SumTest.java|should sum two numbers|Unit|
 
 
 **Example 2: More complex configuration**
 This example is configured to identify unit and component tests from Kotlin. We are assuming that component tests are in the same directory of unit tests, but the only difference is that component tests has a line with expression ```@RunWith(AndroidJUnit4::class)```.
 
 Supposing the following files:
-/home/amandaq/projects/my-android-app/app/src/test/java/SumTest.java
+~/projects/my-android-app/app/src/test/java/SumTest.java
 ```
 class SumTest {
   @Test
@@ -126,7 +126,7 @@ class SumTest {
   }
 }
 ```
-/home/amandaq/projects/my-android-app/app/src/test/java/SumActivityTest.java
+~/projects/my-android-app/app/src/test/java/SumActivityTest.java
 ```
 @RunWith(AndroidJUnit4::class)
 class SumActivityTest {
@@ -155,8 +155,8 @@ tests:
 On this example, you will export:
 | File Name | Test Case Name | Test Type |
 |-----------|----------------|-----------|
-|/home/amandaq/projects/my-android-app/app/src/test/java/SumTest.java|should sum two numbers|Unit|
-|/home/amandaq/projects/my-android-app/app/src/test/java/SumActivityTest.java|should show sum|Component|
+|~/projects/my-android-app/app/src/test/java/SumTest.java|should sum two numbers|Unit|
+|~/projects/my-android-app/app/src/test/java/SumActivityTest.java|should show sum|Component|
 
 Note in the example above, that we used extends, because the types are in the path. If you have different tests in different paths, you can't use extension.
 
