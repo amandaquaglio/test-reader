@@ -5,7 +5,7 @@ Its purpose is organize tests grouping by test types to help managing the tests 
 On version 1.0, the tests can be exported to google spreadsheet. 
 
 
-
+![test-reader](images/test-reader.png)
 
 # Simple Environment Monitor System
 
