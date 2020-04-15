@@ -2,7 +2,7 @@
 Project designed to identity automated test cases, based on yaml configuration and export it. This first version exports the test cases to google sheets. 
 Its purpose is organize tests grouping by test types to help managing the tests created as well to be input to generate graphics and reports of tests distribution.
 
-On version 1.0, the tests can be exported to google spreadsheet. 
+On version 1.0, the tests can be exported only to google spreadsheet. 
 
 
 ![test-reader](images/test-reader.png)
