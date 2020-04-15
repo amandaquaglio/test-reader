@@ -1,8 +1,8 @@
 # test-reader
-Project designed to identity automated test cases, based on yaml configuration and export it. This first version exports the test cases to google sheets. 
-Its purpose is organize tests grouping by test types to help managing the tests created as well to be input to generate graphics and reports of tests distribution.
+Project designed to identify automated Test Cases scripts and export them to an online target. The Test Cases, along with their types/levels, are identified through regular expressions defined on the yaml configuration file. 
+The purpose is to organize test cases, grouping them by test types, to help managing the tests created as well to serve as input to generate charts and reports of tests distribution.
 
-On version 1.0, the tests can be exported only to google spreadsheet. 
+Currently (version 1.0) the tests can be exported only to google spreadsheet.
 
 
 ![test-reader](images/test-reader.png)
