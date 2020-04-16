@@ -160,5 +160,36 @@ On this example, you will export:
 
 Note in the example above, that we used extends, because the types are in the path. If you have different tests in different paths, you can't use extension.
 
+### Samples of configurations to detect test in some frameworks:
+#### Kotlin:
+```
+file_name_regex: .*Test\.kt$
+test_rules:
+  test_description_regex: "`(.+?)`"
+  test_description_strategy: NEXT_LINE
+  test_notation: "^@Test+$"
+```  
+#### Jest:
+```
+file_name_regex: .*.test\.js$
+test_rules:
+   test_description_regex: ".*it\\('(.+?)'"
+   test_description_strategy: SAME_LINE
+   test_notation: ".*it\\('(.+?)'"
+```  
+#### Python:
+```
+file_name_regex: .*/test_.*\.py$
+test_rules:
+   test_description_regex: 'def (.+?)\('
+   test_description_strategy: SAME_LINE
+   test_notation: 'def (.+?)\('
+```  
+
+#### Reference to accepted regular expression
+https://docs.python.org/3/library/re.html
+
+
+
 ## Notes
 This first version only exports to Google Spreadsheets. With this, you can create many view at Google Data Studio to manage your tests.
