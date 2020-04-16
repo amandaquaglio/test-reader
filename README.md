@@ -173,7 +173,7 @@ test_rules:
 ```
 file_name_regex: .*.test\.js$
 test_rules:
-   test_description_regex: ".*it\\('(.+?)'"
+   test_description_regex: ".*it\\('(.+?)',"
    test_description_strategy: SAME_LINE
    test_notation: ".*it\\('(.+?)'"
 ```  
