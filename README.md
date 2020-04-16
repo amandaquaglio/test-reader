@@ -7,7 +7,7 @@ Currently (version 1.0) the tests can be exported only to google spreadsheet.
 
 ![test-reader](images/test-reader.png)
 
-# Simple Environment Monitor System
+# Test Reader
 
 ## Installation
 Using pip from source
