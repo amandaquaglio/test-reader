@@ -39,7 +39,7 @@ For installation from the source, go to the source project path and run
 | APP_NAME                  | The tests will be saved on a sheet of a google spreadsheet. The name of sheet should correspond to APP_NAME, passed on this environment variable| yes |
 | YAML_CONFIG_PATH          | This variable contains the path to yaml file, to describe your tests configuration / distribution, the paths you need. | yes |
 | SPREADSHEET_ID            | The id of your Google spreadsheet. For more info, check on Google Spreadsheet settings.| yes |
-| CREDENTIALS_JSON          | To be able to edit a spreadsheet, you need a credentials json generated on your Google account. For more info, check on Google Spreadsheet settings.| yes |
+| CREDENTIALS_PATH          | To be able to edit a spreadsheet, you need a credentials json generated on your Google account. For more info, check on Google Spreadsheet settings.| yes |
 
 ### Configuration on Google Spreadsheet
 #### Getting your spreadsheet id
