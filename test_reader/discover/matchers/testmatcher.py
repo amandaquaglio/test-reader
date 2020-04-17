@@ -36,20 +36,41 @@ class TestMatcher(Matcher):
     def __get_tests_by_next_line_strategy(self, curr_test_config, file) -> [str]:
         has_test = False
         found_tests = []
+        exclude_test = False
         for line in file:
-            if curr_test_config.test_rules.test_description_strategy == 'NEXT_LINE' and has_test:
-                found_tests.append(self.__get_test_description(curr_test_config, line))
+            if curr_test_config.test_rules.test_description_strategy == 'NEXT_LINE' and has_test and line.strip() != '':
+                found_tests.append(self.__get_test_description(curr_test_config, line.strip()))
                 has_test = False
+                continue
 
             if re.match(curr_test_config.test_rules.test_notation, line.strip()):
-                has_test = True
+                if not exclude_test:
+                    has_test = True
+                else:
+                    exclude_test = False
+                continue
+            exclude_test = self.__should_exclude_test(curr_test_config, line.strip())
         return found_tests
+
+    def __should_exclude_test(self, curr_test_config, line):
+        exclude_test = False
+        if curr_test_config.test_rules.test_exclusion_regex and \
+                curr_test_config.test_rules.test_exclusion_strategy == 'BEFORE_LINE':
+            if re.match(curr_test_config.test_rules.test_exclusion_regex, line.strip()):
+                exclude_test = True
+        return exclude_test
 
     def __get_tests_by_same_line_strategy(self, curr_test_config: ConfigurationTest, file) -> [str]:
         found_tests = []
+        exclude_test = False
         for line in file:
             if re.match(curr_test_config.test_rules.test_notation, line.strip()):
-                found_tests.append(self.__get_test_description(curr_test_config, line))
+                if not exclude_test:
+                    found_tests.append(self.__get_test_description(curr_test_config, line))
+                else:
+                    exclude_test = False
+                    continue
+            exclude_test = self.__should_exclude_test(curr_test_config, line.strip())
         return found_tests
 
     @staticmethod
