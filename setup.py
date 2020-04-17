@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="test-reader",
-    version="1.0.2",
+    version="1.0.3",
     url="https://github.com/amandaquaglio/test-reader",
     author="Amanda Quaglio",
     author_email="amandacq@yahoo.com.br",
