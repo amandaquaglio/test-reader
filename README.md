@@ -185,6 +185,15 @@ test_rules:
    test_notation: 'def (.+?)\('
 ```  
 
+#### Cucumber:
+```
+file_name_regex: .*/*.feature$
+test_rules:
+   test_description_regex: '^Scenario: (.+?)$'
+   test_description_strategy: SAME_LINE
+   test_notation: '^Scenario: (.+?)$'
+```  
+
 #### Reference to accepted regular expression
 https://docs.python.org/3/library/re.html
 
