@@ -108,7 +108,7 @@ tests:
       test_notation: "^@Test+$"
 ```
 On this example, you will export:
-| File Name | Test Case Name | Test Type |
+| FileName | TestCaseName | TestType |
 |-----------|----------------|-----------|
 |~/projects/my-android-app/app/src/test/java/SumTest.java|should sum two numbers|Unit|
 
@@ -153,7 +153,7 @@ tests:
     file_content_contains: "@RunWith(AndroidJUnit4::class)"    
 ```
 On this example, you will export:
-| File Name | Test Case Name | Test Type |
+| FileName | TestCaseName | TestType |
 |-----------|----------------|-----------|
 |~/projects/my-android-app/app/src/test/java/SumTest.java|should sum two numbers|Unit|
 |~/projects/my-android-app/app/src/test/java/SumActivityTest.java|should show sum|Component|
