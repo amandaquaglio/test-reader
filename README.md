@@ -2,7 +2,7 @@
 Project designed to identify automated Test Cases scripts and export them to an online target. The Test Cases, along with their types/levels, are identified through regular expressions defined on the yaml configuration file. 
 The purpose is to organize test cases, grouping them by test types, to help managing the tests created as well to serve as input to generate charts and reports of tests distribution.
 
-Currently (version 1.0) the tests can be exported only to google spreadsheet.
+Currently (version 1.0.x) the tests can be exported only to google spreadsheet.
 
 
 ![test-reader](images/test-reader.png)
@@ -48,14 +48,13 @@ https://docs.google.com/spreadsheets/d/```1wSAkr0m4D-6YolQycW-aZBV3zvBz0aoxqRCZL
 
 #### Generating your credentials.json
 1. Go to https://console.cloud.google.com/
-2. Search for Google Drive API and enable it.
-3. Search for Google Sheets API and enable it.
-4. On Google Sheets API, go to Credentials menu.
-5. Click on CREATE CREDENTIALS and select Service Account
-6. Inform any service account name and click on Create.
-7. You will be redirected to Service account permissions, click on Continue.
-8. At this step, go to create key and click at button + Create Key.
-9. Check if JSON option is select and click on Create. At this step, a json file will be downloaded. This json path should be informed at CREDENTIALS_JSON environment variable.
+2. Search for Google Sheets API and enable it.
+3. On Google Sheets API, go to Credentials menu.
+4. Click on CREATE CREDENTIALS and select Service Account
+5. Inform any service account name and click on Create.
+6. You will be redirected to Service account permissions, click on Continue.
+7. At this step, go to create key and click at button + Create Key.
+8. Check if JSON option is selected and click on Create. At this step, a json file will be downloaded. This json path should be informed at CREDENTIALS_JSON environment variable.
 
 #### Associating permission to your spreadsheet
 1. When you generates yout credentials json (usually it's called dark-balancer<random_value>.json), check that there is a field on json named client_email. Copy the value of this field.
@@ -108,7 +107,7 @@ tests:
       test_notation: "^@Test+$"
 ```
 On this example, you will export:
-| File Name | Test Case Name | Test Type |
+| FileName | TestCaseName | TestType |
 |-----------|----------------|-----------|
 |~/projects/my-android-app/app/src/test/java/SumTest.java|should sum two numbers|Unit|
 
@@ -153,7 +152,7 @@ tests:
     file_content_contains: "@RunWith(AndroidJUnit4::class)"    
 ```
 On this example, you will export:
-| File Name | Test Case Name | Test Type |
+| FileName | TestCaseName | TestType |
 |-----------|----------------|-----------|
 |~/projects/my-android-app/app/src/test/java/SumTest.java|should sum two numbers|Unit|
 |~/projects/my-android-app/app/src/test/java/SumActivityTest.java|should show sum|Component|
@@ -184,6 +183,15 @@ test_rules:
    test_description_regex: 'def (.+?)\('
    test_description_strategy: SAME_LINE
    test_notation: 'def (.+?)\('
+```  
+
+#### Cucumber:
+```
+file_name_regex: .*/*.feature$
+test_rules:
+   test_description_regex: '^Scenario: (.+?)$'
+   test_description_strategy: SAME_LINE
+   test_notation: '^Scenario: (.+?)$'
 ```  
 
 #### Reference to accepted regular expression
