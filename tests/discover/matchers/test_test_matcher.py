@@ -30,7 +30,7 @@ class TestTestMatcher(TestCase):
             # Assert
             self.assertEqual(1, len(result))
             self.assertEqual('test_name', result[0].name)
-            self.assertEqual([test_config_name], result[0].types)
+            self.assertEqual([test_config_name], result[0].test_types)
 
     def test_given_test_rules_with_next_strategy_and_file_with_more_than_one_test_then_tests_should_be_returned(self):
         file_path = 'path'
@@ -56,9 +56,9 @@ class TestTestMatcher(TestCase):
             # Assert
             self.assertEqual(2, len(result))
             self.assertEqual('test_name', result[0].name)
-            self.assertEqual([test_config_name], result[0].types)
+            self.assertEqual([test_config_name], result[0].test_types)
             self.assertEqual('other_test_name', result[1].name)
-            self.assertEqual([test_config_name], result[1].types)
+            self.assertEqual([test_config_name], result[1].test_types)
 
     def test_given_test_rules_with_next_strategy_and_file_with_a_test_without_description_then_test_should_be_returned(
             self):
@@ -85,7 +85,7 @@ class TestTestMatcher(TestCase):
             # Assert
             self.assertEqual(1, len(result))
             self.assertEqual('fun', result[0].name)
-            self.assertEqual([test_config_name], result[0].types)
+            self.assertEqual([test_config_name], result[0].test_types)
 
     def test_given_test_rules_with_same_strategy_and_file_with_a_test_then_test_should_be_returned(self):
         file_path = 'path'
@@ -111,7 +111,7 @@ class TestTestMatcher(TestCase):
             # Assert
             self.assertEqual(1, len(result))
             self.assertEqual('test_name', result[0].name)
-            self.assertEqual([test_config_name], result[0].types)
+            self.assertEqual([test_config_name], result[0].test_types)
 
     def test_given_test_rules_with_same_strategy_and_file_with_more_than_one_test_then_tests_should_be_returned(self):
         file_path = 'path'
@@ -137,9 +137,9 @@ class TestTestMatcher(TestCase):
             # Assert
             self.assertEqual(2, len(result))
             self.assertEqual('test_name', result[0].name)
-            self.assertEqual([test_config_name], result[0].types)
+            self.assertEqual([test_config_name], result[0].test_types)
             self.assertEqual('other_test_name', result[1].name)
-            self.assertEqual([test_config_name], result[1].types)
+            self.assertEqual([test_config_name], result[1].test_types)
 
     def test_given_test_rules_with_same_strategy_and_file_with_a_test_without_description_then_test_should_be_returned(
             self):
@@ -166,7 +166,7 @@ class TestTestMatcher(TestCase):
             # Assert
             self.assertEqual(1, len(result))
             self.assertEqual('def a):', result[0].name)
-            self.assertEqual([test_config_name], result[0].types)
+            self.assertEqual([test_config_name], result[0].test_types)
 
     def test_given_test_rules_with_same_strategy_and_file_without_tests_then_no_test_should_be_returned(self):
         file_path = 'path'
@@ -244,6 +244,6 @@ class TestTestMatcher(TestCase):
             # Assert
             self.assertEqual(2, len(result))
             self.assertEqual('test_name', result[0].name)
-            self.assertEqual([parent_test_name, child_test_name], result[0].types)
+            self.assertEqual([parent_test_name, child_test_name], result[0].test_types)
             self.assertEqual('other_test_name', result[1].name)
-            self.assertEqual([parent_test_name, child_test_name], result[1].types)
+            self.assertEqual([parent_test_name, child_test_name], result[1].test_types)

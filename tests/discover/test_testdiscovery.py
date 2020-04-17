@@ -15,8 +15,8 @@ def get_type_side_effect(*args, **kwargs):
 
 
 class TestTestDiscovery(TestCase):
-    @mock.patch('get_tests.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filenamematcher.FileNameMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filenamematcher.FileNameMatcher.matches')
     @mock.patch('os.walk')
     def test_given_test_file_that_does_not_match_file_name_then_no_tests_should_be_returned(self,
                                                                                             mock_walk,
@@ -33,9 +33,9 @@ class TestTestDiscovery(TestCase):
         mock_filenamematcher.assert_called_once_with('/tests/test_file')
         mock_filecontentcontains.matches.assert_not_called()
 
-    @mock.patch('get_tests.discover.matchers.testmatcher.TestMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filenamematcher.FileNameMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.testmatcher.TestMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filenamematcher.FileNameMatcher.matches')
     @mock.patch('os.walk')
     def test_given_test_file_that_does_not_match_file_content_contains_then_no_tests_should_be_returned(self,
                                                                                                         mock_walk,
@@ -56,9 +56,9 @@ class TestTestDiscovery(TestCase):
         mock_filecontentcontains.assert_called_once_with('/tests/test_file')
         mock_test_matcher.assert_not_called
 
-    @mock.patch('get_tests.discover.matchers.testmatcher.TestMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filenamematcher.FileNameMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.testmatcher.TestMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filenamematcher.FileNameMatcher.matches')
     @mock.patch('os.walk')
     def test_given_test_file_that_does_not_have_tests_then_no_tests_should_be_returned(self, mock_walk,
                                                                                        mock_filenamematcher,
@@ -75,9 +75,9 @@ class TestTestDiscovery(TestCase):
         tests = TestDiscovery(test_config).discover_tests()
         self.assertEqual([], tests)
 
-    @mock.patch('get_tests.discover.matchers.testmatcher.TestMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filenamematcher.FileNameMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.testmatcher.TestMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filenamematcher.FileNameMatcher.matches')
     @mock.patch('os.walk')
     def test_given_test_file_when_file_name_has_no_types_in_common_to_file_content_then_no_tests_should_be_returned(
             self,
@@ -97,9 +97,9 @@ class TestTestDiscovery(TestCase):
         tests = TestDiscovery(test_config).discover_tests()
         self.assertEqual([], tests)
 
-    @mock.patch('get_tests.discover.matchers.testmatcher.TestMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filenamematcher.FileNameMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.testmatcher.TestMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filenamematcher.FileNameMatcher.matches')
     @mock.patch('os.walk')
     def test_given_test_file_when_test_type_has_no_types_in_common_to_file_types_then_no_tests_should_be_returned(
             self,
@@ -119,9 +119,9 @@ class TestTestDiscovery(TestCase):
         tests = TestDiscovery(test_config).discover_tests()
         self.assertEqual([], tests)
 
-    @mock.patch('get_tests.discover.matchers.testmatcher.TestMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filenamematcher.FileNameMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.testmatcher.TestMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filenamematcher.FileNameMatcher.matches')
     @mock.patch('os.walk')
     def test_given_test_file_when_test_type_has_one_type_in_common_to_file_types_then_tests_should_be_returned(
             self,
@@ -144,9 +144,9 @@ class TestTestDiscovery(TestCase):
         self.assertEqual('test_case', tests[0].description)
         self.assertEqual('Test', tests[0].type)
 
-    @mock.patch('get_tests.discover.matchers.testmatcher.TestMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
-    @mock.patch('get_tests.discover.matchers.filenamematcher.FileNameMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.testmatcher.TestMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
+    @mock.patch('test_reader.discover.matchers.filenamematcher.FileNameMatcher.matches')
     @mock.patch('os.walk')
     def test_given_test_file_when_test_type_has_two_types_in_common_to_file_then_most_weighted_type_should_be_returned(
             self,
