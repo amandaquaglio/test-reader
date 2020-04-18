@@ -39,7 +39,7 @@ For installation from the source, go to the source project path and run
 | APP_NAME                  | The tests will be saved on a sheet of a google spreadsheet. The name of sheet should correspond to APP_NAME, passed on this environment variable| yes |
 | YAML_CONFIG_PATH          | This variable contains the path to yaml file, to describe your tests configuration / distribution, the paths you need. | yes |
 | SPREADSHEET_ID            | The id of your Google spreadsheet. For more info, check on Google Spreadsheet settings.| yes |
-| CREDENTIALS_JSON          | To be able to edit a spreadsheet, you need a credentials json generated on your Google account. For more info, check on Google Spreadsheet settings.| yes |
+| CREDENTIALS_PATH          | To be able to edit a spreadsheet, you need a credentials json generated on your Google account. For more info, check on Google Spreadsheet settings.| yes |
 
 ### Configuration on Google Spreadsheet
 #### Getting your spreadsheet id
@@ -54,7 +54,7 @@ https://docs.google.com/spreadsheets/d/```1wSAkr0m4D-6YolQycW-aZBV3zvBz0aoxqRCZL
 5. Inform any service account name and click on Create.
 6. You will be redirected to Service account permissions, click on Continue.
 7. At this step, go to create key and click at button + Create Key.
-8. Check if JSON option is selected and click on Create. At this step, a json file will be downloaded. This json path should be informed at CREDENTIALS_JSON environment variable.
+8. Check if JSON option is selected and click on Create. At this step, a json file will be downloaded. This json path should be informed at CREDENTIALS_PATH environment variable.
 
 #### Associating permission to your spreadsheet
 1. When you generates yout credentials json (usually it's called dark-balancer<random_value>.json), check that there is a field on json named client_email. Copy the value of this field.
@@ -191,8 +191,21 @@ file_name_regex: .*/*.feature$
 test_rules:
    test_description_regex: '^Scenario: (.+?)$'
    test_description_strategy: SAME_LINE
-   test_notation: '^Scenario: (.+?)$'
+   test_notation: '^Scenario: (.+?)$' 
+   test_exclusion_regex: "^@wip"
+   test_exclusion_strategy: "BEFORE_LINE"
 ```  
+
+#### Java
+```
+    file_name_regex: .*Test\.java$
+    test_rules:
+      test_description_regex: '^public void (.+?)\('
+      test_description_strategy: NEXT_LINE
+      test_notation: "^@Test+$"
+      test_exclusion_regex: "^@Ignore"
+      test_exclusion_strategy: "BEFORE_LINE"
+```      
 
 #### Reference to accepted regular expression
 https://docs.python.org/3/library/re.html
