@@ -12,6 +12,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "google-auth",
-	    "google-api-python-client"
+	"google-api-python-client",
+	"pyyaml"
     ]
 )
