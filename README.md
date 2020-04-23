@@ -197,7 +197,7 @@ test_rules:
    test_exclusion_strategy: "BEFORE_LINE"
 ```  
 
-#### Java
+#### JUnit
 ```
     file_name_regex: .*Test\.java$
     test_rules:
