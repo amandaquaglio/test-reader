@@ -1,3 +1,4 @@
+[![Python 3.7.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-377/)
 # test-reader
 Project designed to identify automated Test Cases scripts and export them to an online target. The Test Cases, along with their types/levels, are identified through regular expressions defined on the yaml configuration file. 
 The purpose is to organize test cases, grouping them by test types, to help managing the tests created as well to serve as input to generate charts and reports of tests distribution.
