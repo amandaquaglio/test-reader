@@ -208,6 +208,15 @@ test_rules:
       test_exclusion_strategy: "BEFORE_LINE"
 ```      
 
+#### Spock
+```
+    file_name_regex: '.*/*.groovy$'
+    test_rules: 
+     test_description_regex: 'def (.+?)\('
+     test_description_strategy: SAME_LINE
+     test_notation: 'def (.+?)\('
+``` 
+
 #### Reference to accepted regular expression
 https://docs.python.org/3/library/re.html
 
