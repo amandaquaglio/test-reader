@@ -30,7 +30,7 @@ class TestFileContentContainsMatcher(TestCase):
         test_config.get_type_by_name.return_value = test_config
         test_config.file_content_contains = '@RunWith(RobolectricTestRunner::class)'
 
-        file_content = 'Titulo \n@RunWith(RobolectricTestRunner::class) \nFim'
+        file_content = 'Titulo \nBla @RunWith(RobolectricTestRunner::class) \nFim'
         with mock.patch('builtins.open', mock_open(read_data=file_content)):
             # Act
             result = FileContentContainsMatcher(test_config).matches('path')

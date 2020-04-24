@@ -13,7 +13,7 @@ class FileContentContainsMatcher(Matcher):
             if curr_test_config.file_content_contains:
                 with open(file_path) as file:
                     for line in file:
-                        if line.strip() == curr_test_config.file_content_contains:
+                        if curr_test_config.file_content_contains in line.strip():
                             matched_types.append(test_name)
                             break
                 file.close()
