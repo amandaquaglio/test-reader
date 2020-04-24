@@ -1,3 +1,4 @@
+[![Python 3.7.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-377/)
 # test-reader
 Project designed to identify automated Test Cases scripts and export them to an online target. The Test Cases, along with their types/levels, are identified through regular expressions defined on the yaml configuration file. 
 The purpose is to organize test cases, grouping them by test types, to help managing the tests created as well to serve as input to generate charts and reports of tests distribution.
@@ -196,7 +197,7 @@ test_rules:
    test_exclusion_strategy: "BEFORE_LINE"
 ```  
 
-#### Java
+#### JUnit
 ```
     file_name_regex: .*Test\.java$
     test_rules:
@@ -206,6 +207,15 @@ test_rules:
       test_exclusion_regex: "^@Ignore"
       test_exclusion_strategy: "BEFORE_LINE"
 ```      
+
+#### Spock
+```
+    file_name_regex: '.*/*.groovy$'
+    test_rules: 
+     test_description_regex: 'def (.+?)\('
+     test_description_strategy: SAME_LINE
+     test_notation: 'def (.+?)\('
+``` 
 
 #### Reference to accepted regular expression
 https://docs.python.org/3/library/re.html
