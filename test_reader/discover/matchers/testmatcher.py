@@ -75,9 +75,10 @@ class TestMatcher(Matcher):
 
     @staticmethod
     def __get_test_description(curr_test_config, line):
-        result = re.search(curr_test_config.test_rules.test_description_regex, line)
+        result = re.search(curr_test_config.test_rules.test_description_regex, line.strip())
         if result:
-            return result.group(1)
+            position = result.groups().__len__()
+            return result.group(position).strip()
         else:
             return line.strip()
 

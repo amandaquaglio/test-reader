@@ -1,5 +1,4 @@
 from unittest import TestCase, mock
-from test_reader.config.configurationtest import ConfigurationTest
 from test_reader.config.testrules import TestRules
 
 
