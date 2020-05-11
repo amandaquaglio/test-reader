@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="test-reader",
-    version="1.0.1",
+    version="1.0.7",
     url="https://github.com/amandaquaglio/test-reader",
     author="Amanda Quaglio",
     author_email="amandacq@yahoo.com.br",
@@ -12,6 +12,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "google-auth",
-	"google-api-python-client"
+	    "google-api-python-client",
+	    "pyyaml"
     ]
 )

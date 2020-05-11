@@ -1,7 +1,7 @@
 import os
 from google.oauth2 import service_account
 from apiclient import discovery
-
+import logging
 
 class SheetsPublisher:
     SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -26,15 +26,16 @@ class SheetsPublisher:
         sheet_metadata = service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
 
         sheet_exists = self.__sheet_exists(app_name, sheet_metadata)
-        self.__create_sheet(app_name, service, sheet_exists, spreadsheet_id)
+        if not sheet_exists:
+            logging.info(f"Sheet {app_name} not found")
+            self.__create_sheet(app_name, service, spreadsheet_id)
         request = service.spreadsheets().values().batchUpdate(spreadsheetId=spreadsheet_id,
                                                               body=batch_update_values_request_body)
         request.execute()
 
     @staticmethod
-    def __create_sheet(app_name, service, sheet_exists, spreadsheet_id):
-        if not sheet_exists:
-            request_create = {
+    def __create_sheet(app_name, service, spreadsheet_id):
+        request_create = {
                 'requests': [
                     {
                         'addSheet': {
@@ -45,7 +46,11 @@ class SheetsPublisher:
                     }
                 ]
             }
-            service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id, body=request_create).execute()
+        service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id, body=request_create).execute()
+        logging.info(f"Creating sheet")
+
+        response = service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id, body=request_create).execute()
+        logging.info(f"Creating sheet response: {response} ")
 
     @staticmethod
     def __sheet_exists(app_name, sheet_metadata):
