@@ -46,10 +46,8 @@ class SheetsPublisher:
                     }
                 ]
             }
-        service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id, body=request_create).execute()
-        logging.info(f"Creating sheet")
-
         response = service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id, body=request_create).execute()
+        logging.info(f"Creating sheet")
         logging.info(f"Creating sheet response: {response} ")
 
     @staticmethod
