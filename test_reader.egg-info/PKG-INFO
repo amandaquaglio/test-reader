@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: test-reader
+Version: 1.0.1
+Summary: A Test reader based on yaml config to export test cases and its test types
+Home-page: https://github.com/amandaquaglio/test-reader
+Author: Amanda Quaglio
+Author-email: amandacq@yahoo.com.br
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

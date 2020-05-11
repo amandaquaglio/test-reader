@@ -13,12 +13,11 @@ class SheetsPublisher:
 
         service = discovery.build('sheets', 'v4', credentials=credentials)
         spreadsheet_id = os.environ.get("SPREADSHEET_ID")
-        last_column = chr(64 + len(values[0]))
         batch_update_values_request_body = {
             'value_input_option': 'RAW',
             'data': [{
                 'majorDimension': "ROWS",
-                'range': f"{app_name}!A1:{last_column}{len(values) + 1}",
+                'range': f"{app_name}!A2:C{len(values) + 1}",
                 'values': values
             }]
         }
@@ -45,7 +44,17 @@ class SheetsPublisher:
                     }
                 ]
             }
+
+            request_create_header = {
+                'value_input_option': 'RAW',
+                'data': [{
+                    'majorDimension': "ROWS",
+                    'range': f"{app_name}!A1:C1",
+                    'values': [['FileName', 'TestCaseName', 'TestType']]
+                }]
+            }
             service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id, body=request_create).execute()
+            service.spreadsheets().values().batchUpdate(spreadsheetId=spreadsheet_id, body=request_create_header).execute()
 
     @staticmethod
     def __sheet_exists(app_name, sheet_metadata):

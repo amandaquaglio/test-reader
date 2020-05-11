@@ -8,9 +8,12 @@ from test_reader.discover.testdiscovery import TestDiscovery
 
 def get_type_side_effect(*args, **kwargs):
     mock = MagicMock()
-    mock.weight = 2
     if args[0] == 'Abc':
+        mock.name = 'Abc'
         mock.weight = 1
+    else:
+        mock.name = 'Test'
+        mock.weight = 2
     return mock
 
 
@@ -137,12 +140,13 @@ class TestTestDiscovery(TestCase):
 
         test_config = MagicMock()
         test_config.name = 'Test'
+        test_config.get_type_by_name.side_effect = [test_config]
         test_config.path = '/'
         tests = TestDiscovery(test_config).discover_tests()
         self.assertEqual(1, len(tests))
         self.assertEqual('/tests/test_file', tests[0].file_name)
         self.assertEqual('test_case', tests[0].description)
-        self.assertEqual('Test', tests[0].type)
+        self.assertEqual('Test', tests[0].type_name)
 
     @mock.patch('test_reader.discover.matchers.testmatcher.TestMatcher.matches')
     @mock.patch('test_reader.discover.matchers.filecontentcontainsmatcher.FileContentContainsMatcher.matches')
@@ -175,4 +179,4 @@ class TestTestDiscovery(TestCase):
         self.assertEqual(1, len(tests))
         self.assertEqual('/tests/test_file', tests[0].file_name)
         self.assertEqual('test_case', tests[0].description)
-        self.assertEqual('Test', tests[0].type)
+        self.assertEqual('Test', tests[0].type_name)

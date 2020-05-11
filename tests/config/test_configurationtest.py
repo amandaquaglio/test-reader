@@ -67,3 +67,19 @@ class TestConfigurationTest(TestCase):
         parent.add_child(ConfigurationTest({'name': 'Child', 'test_rules': {'test_description_regex': 'ChildTeste'}}))
         child = parent.get_type_by_name('Child')
         self.assertEqual('ChildTeste', child.test_rules.test_description_regex)
+
+    def test_given_child_without_spreadsheet_columns_when_add_child_then_it_should_have_this_attr_from_parent(self):
+        parent = ConfigurationTest({'name': 'Unit', 'spreadsheet_columns': {'column1': 'value1', 'column2': 'value2'}})
+        parent.add_child(ConfigurationTest({'name': 'Child'}))
+        child = parent.get_type_by_name('Child')
+        self.assertEqual('value1', child.spreadsheet_columns['column1'])
+        self.assertEqual('value2', child.spreadsheet_columns['column2'])
+
+    def test_given_child_with_spreadsheet_columns_when_add_child_then_it_should_keep_the_attr_value(self):
+        parent = ConfigurationTest({'name': 'Unit', 'spreadsheet_columns': {'column1': 'value1', 'column2': 'value2'}})
+        parent.add_child(ConfigurationTest({'name': 'Child', 'spreadsheet_columns': {'column1': 'childvalue1', 'column3': 'value3', 'column4': 'value4'}}))
+        child = parent.get_type_by_name('Child')
+        self.assertEqual('childvalue1', child.spreadsheet_columns['column1'])
+        self.assertEqual('value2', child.spreadsheet_columns['column2'])
+        self.assertEqual('value3', child.spreadsheet_columns['column3'])
+        self.assertEqual('value4', child.spreadsheet_columns['column4'])

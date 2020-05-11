@@ -1,0 +1,3 @@
+#!/usr/bin/python3
+from test_reader.readtests import ReadTests
+ReadTests().read()

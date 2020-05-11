@@ -12,11 +12,6 @@ class ConfigurationTest(object):
         self.file_content_contains = self.read_property(test_config, 'file_content_contains')
         self.children = []
         self.weight = 1
-        self.spreadsheet_columns = self.read_property(test_config, 'spreadsheet_columns')
-
-        if self.spreadsheet_columns is None:
-            self.spreadsheet_columns = {}
-
         test_rules = self.read_property(test_config, 'test_rules')
         if test_rules is not None:
             self.test_rules = TestRules(test_rules)
@@ -31,13 +26,6 @@ class ConfigurationTest(object):
         if self.file_content_contains is not None and child.file_content_contains is None:
             child.file_content_contains = self.file_content_contains
 
-        if self.spreadsheet_columns is not None and child.spreadsheet_columns is None:
-            child.spreadsheet_columns = self.spreadsheet_columns
-        else:
-            if self.spreadsheet_columns is not None and child.spreadsheet_columns is not None:
-                for key in self.spreadsheet_columns:
-                    if key not in child.spreadsheet_columns:
-                        child.spreadsheet_columns[key] = self.spreadsheet_columns[key]
         if self.test_rules is not None:
             if child.test_rules is None:
                 child.test_rules = self.test_rules

@@ -46,8 +46,7 @@ class TestDiscovery:
             test_type_candidates = set(file_type_candidates).intersection(test_result.test_types)
             if test_type_candidates:
                 selected_test_type = self.__select_test_type(test_type_candidates)
-                selected_test_config = self.__test_config.get_type_by_name(selected_test_type)
-                self.__results.append(Test(file_name, test_result.name, selected_test_config))
+                self.__results.append(Test(file_name, test_result.name, selected_test_type))
 
     @staticmethod
     def __get_file_type_candidates(file_results):
