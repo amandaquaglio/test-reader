@@ -1,14 +1,21 @@
 from __future__ import annotations
 from .testrules import TestRules
+import os
 
 
 class ConfigurationTest(object):
 
     def __init__(self, test_config: {}):
+        root_file_path = self.get_root_file_path()
         self.name = self.read_property(test_config, 'name')
         self.extends = self.read_property(test_config, 'extends')
         self.file_name_regex = self.read_property(test_config, 'file_name_regex')
+
         self.path = self.read_property(test_config, 'path')
+        if root_file_path:
+            self.path = os.path.join(root_file_path + self.path)
+            self.path = os.path.normpath(self.path)
+
         self.file_content_contains = self.read_property(test_config, 'file_content_contains')
         self.children = []
         self.weight = 1
@@ -22,6 +29,13 @@ class ConfigurationTest(object):
             self.test_rules = TestRules(test_rules)
         else:
             self.test_rules = TestRules({})
+
+    @staticmethod
+    def get_root_file_path():
+        root_file_path = os.environ.get("ROOT_FILE_PATH")
+        if root_file_path:
+            root_file_path = root_file_path + os.sep
+        return root_file_path
 
     def add_child(self, child: ConfigurationTest):
         child.weight = self.weight + 1

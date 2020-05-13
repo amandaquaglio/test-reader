@@ -41,7 +41,7 @@ For installation from the source, go to the source project path and run
 | YAML_CONFIG_PATH          | This variable contains the path to yaml file, to describe your tests configuration / distribution, the paths you need. | yes |
 | SPREADSHEET_ID            | The id of your Google spreadsheet. For more info, check on Google Spreadsheet settings.| yes |
 | CREDENTIALS_PATH          | To be able to edit a spreadsheet, you need a credentials json generated on your Google account. For more info, check on Google Spreadsheet settings.| yes |
-
+| ROOT_FILE_PATH            | If this variable is passed it will be concatenate to paths configured at yaml file | no |            
 ### Configuration on Google Spreadsheet
 #### Getting your spreadsheet id
 Create a new Spreadsheet in your Google Drive. On URL, your spreadsheet id will be located between  https://docs.google.com/spreadsheets/d/ and /edit. See the example below:
@@ -78,8 +78,10 @@ This way, you can map the distribution and test types you need, and use it to ma
 | path                      | Path where you will find your tests.                                        | yes (if it has no extends) |
 | test_rules / test_description_regex | Test rules will have the filters to identify a test case. The test_description_regex will have the regex to extract your description from a line. | yes (if it has no extends) |
 | test_rules / test_description_strategy |  This attribute should have the strategy to get the test description based on test notation. If the description is  on the same line of the test notation, you will use SAME_LINE value. If it is on the next line, you should use NEXT_LINE value. | yes (if it has no extends) |
-| test_rules / test_notation |  This attribute will inform if the regular expression to identify a new test in the file.| yes (if it has no extends) |
-
+| test_rules / test_notation |  This attribute will inform the regular expression to identify a new test in the file.| yes (if it has no extends) |
+| test_rules / test_exclusion_regex | This attribute will inform the regular expression to identify that a test should be ignored. It should be configured with test_exclusion_strategy. | no |
+| test_rules / test_exclusion_strategy |  This attribute should have the strategy to exclude the test description based on test exclusion regex. If the description is  on the same line of the test exclusion regex, you will use SAME_LINE value. If it is on the next line, you should use NEXT_LINE value. It should be configured with test_exclusion_regex. | no |
+| spreadsheet_columns | This attribute should be used to configure additional columns with fixed values to be exported on sheet. The attributes should be configured inside this attribute. For each key inside this attribute, there will be a column and value of the key will be the value for this column and test_type. The sheet will have all the columns configured on yaml. If a type does not have this column, it will have an empty value for the column. Extension will be applied, so that, if a parent type has a column with a value, it's children, will have the column with this value, unless, it is override on child. | no|
 
 **Example 1: Simple configuration**
 This example is configured to identify unit tests from Kotlin. 

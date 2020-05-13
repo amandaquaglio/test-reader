@@ -77,9 +77,28 @@ class TestConfigurationTest(TestCase):
 
     def test_given_child_with_spreadsheet_columns_when_add_child_then_it_should_keep_the_attr_value(self):
         parent = ConfigurationTest({'name': 'Unit', 'spreadsheet_columns': {'column1': 'value1', 'column2': 'value2'}})
-        parent.add_child(ConfigurationTest({'name': 'Child', 'spreadsheet_columns': {'column1': 'childvalue1', 'column3': 'value3', 'column4': 'value4'}}))
+        parent.add_child(ConfigurationTest({'name': 'Child',
+                                            'spreadsheet_columns': {'column1': 'childvalue1', 'column3': 'value3',
+                                                                    'column4': 'value4'}}))
         child = parent.get_type_by_name('Child')
         self.assertEqual('childvalue1', child.spreadsheet_columns['column1'])
         self.assertEqual('value2', child.spreadsheet_columns['column2'])
         self.assertEqual('value3', child.spreadsheet_columns['column3'])
         self.assertEqual('value4', child.spreadsheet_columns['column4'])
+
+    @mock.patch.dict('os.environ', {"ROOT_FILE_PATH": "/home/dir"})
+    def test_given_configuration_file_with_root_file_path_and_path_without_slash_then_it_should_be_concatenated_to_path(self):
+        config = ConfigurationTest({'name': 'Unit', 'path': 'teste'})
+        self.assertEqual('/home/dir/teste', config.path)
+
+    @mock.patch.dict('os.environ', {"ROOT_FILE_PATH": "/home/dir/"})
+    def test_given_configuration_file_with_root_file_path_with_slash_then_it_should_be_concatenated_to_path(
+            self):
+        config = ConfigurationTest({'name': 'Unit', 'path': 'teste'})
+        self.assertEqual('/home/dir/teste', config.path)
+
+    @mock.patch.dict('os.environ', {"ROOT_FILE_PATH": "/home/dir/"})
+    def test_given_configuration_file_with_root_file_path_and_path_with_slash_then_it_should_be_concatenated_to_path(
+            self):
+        config = ConfigurationTest({'name': 'Unit', 'path': '/teste'})
+        self.assertEqual('/home/dir/teste', config.path)
