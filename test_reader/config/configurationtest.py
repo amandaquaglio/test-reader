@@ -6,15 +6,11 @@ import os
 class ConfigurationTest(object):
 
     def __init__(self, test_config: {}):
-        root_file_path = self.get_root_file_path()
         self.name = self.read_property(test_config, 'name')
         self.extends = self.read_property(test_config, 'extends')
         self.file_name_regex = self.read_property(test_config, 'file_name_regex')
 
-        self.path = self.read_property(test_config, 'path')
-        if root_file_path:
-            self.path = os.path.join(root_file_path + self.path)
-            self.path = os.path.normpath(self.path)
+        self.__handle_path(test_config)
 
         self.file_content_contains = self.read_property(test_config, 'file_content_contains')
         self.children = []
@@ -29,6 +25,14 @@ class ConfigurationTest(object):
             self.test_rules = TestRules(test_rules)
         else:
             self.test_rules = TestRules({})
+
+    def __handle_path(self, test_config):
+        self.path = self.read_property(test_config, 'path')
+        if self.path:
+            root_file_path = self.get_root_file_path()
+            if root_file_path:
+                self.path = os.path.join(root_file_path + self.path)
+                self.path = os.path.normpath(self.path)
 
     @staticmethod
     def get_root_file_path():
