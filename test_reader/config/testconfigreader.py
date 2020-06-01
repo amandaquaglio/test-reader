@@ -1,4 +1,4 @@
-from yaml import load
+from yaml import safe_load
 from os import environ
 from test_reader.config.configurationtest import ConfigurationTest
 
@@ -45,7 +45,7 @@ class TestConfigReader:
 
     def __read_test_configurations(self):
         with open(environ.get("YAML_CONFIG_PATH")) as yaml_config:
-            tests = load(yaml_config)['tests']
+            tests = safe_load(yaml_config)['tests']
             for test in tests:
                 config_test = ConfigurationTest(test)
                 config_test = self.__handle_root_test(config_test)

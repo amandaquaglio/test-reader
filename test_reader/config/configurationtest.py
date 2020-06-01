@@ -33,7 +33,6 @@ class ConfigurationTest(object):
             if root_file_path:
                 self.path = os.path.join(root_file_path + self.path)
                 self.path = os.path.normpath(self.path)
-
     @staticmethod
     def get_root_file_path():
         root_file_path = os.environ.get("ROOT_FILE_PATH")
